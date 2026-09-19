@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+ROOT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+DIST="$HOME/.gradle/wrapper/dists/battuk-gradle-8.9"
+ZIP="$HOME/.gradle/wrapper/dists/gradle-8.9-bin.zip"
+if command -v gradle >/dev/null 2>&1; then exec gradle "$@"; fi
+if [ ! -x "$DIST/gradle-8.9/bin/gradle" ]; then
+  mkdir -p "$DIST"
+  if [ ! -f "$ZIP" ]; then
+    curl -L --fail --silent --show-error -o "$ZIP" "https://services.gradle.org/distributions/gradle-8.9-bin.zip"
+  fi
+  rm -rf "$DIST/gradle-8.9"
+  unzip -q "$ZIP" -d "$DIST"
+fi
+exec "$DIST/gradle-8.9/bin/gradle" "$@"
