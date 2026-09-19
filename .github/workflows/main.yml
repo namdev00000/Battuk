@@ -10,10 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: BattukPhase1
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,14 +22,15 @@ jobs:
           cache: gradle
 
       - name: Make Gradle wrapper executable
-        run: chmod +x ./gradlew
+        run: chmod +x Battuk-Phase2-MVP/BattukPhase1/gradlew
 
       - name: Build debug APK
+        working-directory: Battuk-Phase2-MVP/BattukPhase1
         run: ./gradlew :app:assembleDebug --stacktrace
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: battuk-phase2-debug-apk
-          path: BattukPhase1/app/build/outputs/apk/debug/*.apk
+          path: Battuk-Phase2-MVP/BattukPhase1/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
