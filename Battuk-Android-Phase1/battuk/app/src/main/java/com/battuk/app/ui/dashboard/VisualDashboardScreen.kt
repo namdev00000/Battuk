@@ -27,6 +27,7 @@ import com.battuk.app.ui.theme.ChartVegetable
 import com.battuk.app.util.CurrencyUtils
 import com.battuk.app.viewmodel.ReportPeriod
 import com.battuk.app.viewmodel.ReportsViewModel
+import androidx.compose.ui.unit.dp
 
 private val palette = listOf(ChartVegetable, ChartKirana, ChartMilk, ChartFood, ChartTransport, ChartOthers)
 
