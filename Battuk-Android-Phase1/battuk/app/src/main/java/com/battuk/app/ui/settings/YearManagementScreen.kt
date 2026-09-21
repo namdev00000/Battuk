@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.battuk.app.viewmodel.YearManagementViewModel
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun YearManagementScreen(viewModel: YearManagementViewModel) {
