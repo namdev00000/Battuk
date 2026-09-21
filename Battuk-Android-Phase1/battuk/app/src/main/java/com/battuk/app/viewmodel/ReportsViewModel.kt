@@ -43,12 +43,14 @@ fun ReportPeriod.rangeEnding(referenceDate: LocalDate = LocalDate.now()): Report
 
 class ReportsViewModel(private val repository: BattukRepository) : ViewModel() {
 
-    var period by mutableStateOf(ReportPeriod.MONTH)
+    private val periodState = mutableStateOf(ReportPeriod.MONTH)
+    val period: ReportPeriod
+        get() = periodState.value
 
-    private val rangeFlow = kotlinx.coroutines.flow.MutableStateFlow(period.rangeEnding())
+    private val rangeFlow = kotlinx.coroutines.flow.MutableStateFlow(periodState.value.rangeEnding())
 
     fun setPeriod(newPeriod: ReportPeriod) {
-        period = newPeriod
+        periodState.value = newPeriod
         rangeFlow.value = newPeriod.rangeEnding()
     }
 
