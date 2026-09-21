@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import com.battuk.app.util.CurrencyUtils
 import com.battuk.app.util.DateUtils
 import com.battuk.app.viewmodel.IncomeViewModel
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
