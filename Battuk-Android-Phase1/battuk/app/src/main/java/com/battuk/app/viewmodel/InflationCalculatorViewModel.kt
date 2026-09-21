@@ -22,7 +22,9 @@ class InflationCalculatorViewModel(private val repository: BattukRepository) : V
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     var selectedItem by mutableStateOf<String?>(null)
-    var period by mutableStateOf(ReportPeriod.MONTH)
+    private val periodState = mutableStateOf(ReportPeriod.MONTH)
+    val period: ReportPeriod
+        get() = periodState.value
     var result by mutableStateOf<InflationResult?>(null)
     var errorMessage by mutableStateOf<String?>(null)
 
@@ -33,7 +35,7 @@ class InflationCalculatorViewModel(private val repository: BattukRepository) : V
     }
 
     fun setPeriod(newPeriod: ReportPeriod) {
-        period = newPeriod
+        periodState.value = newPeriod
         result = null
     }
 
