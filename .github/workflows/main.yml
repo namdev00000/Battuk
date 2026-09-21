@@ -1,7 +1,15 @@
 name: Build Battuk Debug APK
 
-# Repo root IS the Gradle root (settings.gradle.kts lives at the top level),
-# so no working-directory override is needed anywhere in this workflow.
+# The actual Gradle project (settings.gradle.kts, gradlew, app/) lives at
+# Battuk-Android-Phase1/battuk in this repo, NOT at the repo root — so every
+# run: step below is pointed there via the job-level working-directory default,
+# and the artifact upload path is prefixed to match.
+#
+# If you'd rather avoid this nesting altogether, move everything OUT of
+# Battuk-Android-Phase1/battuk/ up to the repo root instead, delete the now-empty
+# Battuk-Android-Phase1 folder, and switch back to the simpler workflow (no
+# working-directory / path prefix needed). Either approach works — this one
+# just matches your repo exactly as it is right now.
 
 on:
   push:
@@ -14,6 +22,9 @@ jobs:
   build:
     name: Build Debug APK
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Battuk-Android-Phase1/battuk
 
     steps:
       - name: Checkout source
@@ -25,8 +36,6 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # Uses the official action instead of raw `sdkmanager` calls, which
-      # installs and PATHs the Android command-line tools correctly.
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
@@ -47,5 +56,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: battuk-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          # Not affected by working-directory (upload-artifact paths are always
+          # relative to the repo root), so the nested path is spelled out here.
+          path: Battuk-Android-Phase1/battuk/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
