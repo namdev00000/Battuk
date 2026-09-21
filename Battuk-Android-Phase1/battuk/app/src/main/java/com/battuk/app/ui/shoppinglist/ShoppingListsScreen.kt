@@ -21,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.battuk.app.util.DateUtils
 import com.battuk.app.viewmodel.ShoppingListViewModel
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun ShoppingListsScreen(
