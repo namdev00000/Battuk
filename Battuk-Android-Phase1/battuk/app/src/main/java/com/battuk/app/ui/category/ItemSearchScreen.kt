@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.battuk.app.data.entity.Item
 import com.battuk.app.viewmodel.CategoryViewModel
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun ItemSearchScreen(
